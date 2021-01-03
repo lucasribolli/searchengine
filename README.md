@@ -8,3 +8,14 @@ cd crawler/wikipedia
 ```
 scrapy crawl wikipedia -O data\wikipedia.json
 ```
+
+## Run index_data.py
+```
+cd ..
+```
+```
+cd ..
+```
+```
+python index_data.py
+```
