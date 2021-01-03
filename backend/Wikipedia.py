@@ -1,5 +1,5 @@
 from elasticsearch_dsl import Document, Text, Date
-from backend.ES import ES
+from ES import ES
 
 ES()
 
