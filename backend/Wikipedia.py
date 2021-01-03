@@ -1,12 +1,12 @@
+from elasticsearch_dsl import Document, Text, Date
 from backend.ES import ES
-from elasticsearch_dsl import Document, Text
 
 ES()
 
 class Wikipedia(Document):
     url = Text()
     title = Text()
-    lastmod = Text()
+    lastmod = Date()
     text = Text()
 
     class Index:
