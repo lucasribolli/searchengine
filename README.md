@@ -10,7 +10,7 @@ scrapy crawl wikipedia -O data\wikipedia.json
 ```
 
 ## Run index_data.py
-PS: Be careful to not run twice.
+Be careful to not run twice.
 ```
 cd ..
 ```
