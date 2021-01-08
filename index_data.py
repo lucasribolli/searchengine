@@ -17,10 +17,10 @@ def index():
 
     for _, row in wikipedia_data.iterrows():
         wikipedia = Wikipedia()
-        wikipedia.url = row['url']
-        wikipedia.title = row['title']
-        wikipedia.lastmod = format_date(row['lastmod'])
-        wikipedia.text = row['text']
+        wikipedia.url = row['url'] if 'url' in row else ''
+        wikipedia.title = row['title'] if 'title' in row else ''
+        wikipedia.lastmod = format_date(row['lastmod']) if 'lastmod' in row else datetime.now()
+        wikipedia.text = row['text'] if 'text' in row else ''
         wikipedia.save()
 
 if __name__=="__main__":
