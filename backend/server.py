@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
-from ES import ES
+from backend import ES
 from elasticsearch_dsl import Q, A
-from Wikipedia import Wikipedia
+from backend import Wikipedia
 from flask_cors import CORS
 
 
