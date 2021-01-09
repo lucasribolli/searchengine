@@ -2,12 +2,14 @@ from flask import Flask, jsonify, request
 from ES import ES
 from elasticsearch_dsl import Q, A
 from Wikipedia import Wikipedia
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 ES()
 
-@app.route('/search', methods=["GET"])
+@app.route('/api/search', methods=["GET"])
 def search():
     search = request.json["search"]
     start = request.args.get("start", type=int, default=0)
