@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
-from backend import ES
-from elasticsearch_dsl import Q, A
-from backend import Wikipedia
+from elasticsearch_dsl import Q
 from flask_cors import CORS
+from . import Wikipedia
+from . import ES
 
 
 app = Flask(__name__)

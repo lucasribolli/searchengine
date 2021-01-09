@@ -28,3 +28,11 @@ cd ..\..
 python index_data.py
 ```
 
+## Run Flask
+```
+cd backend
+$env:FLASK_APP="server.py"
+$env:FLASK_ENV="development"
+flask run --host=0.0.0.0 --port=8088
+```
+
