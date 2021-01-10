@@ -16,7 +16,7 @@ class WikipediaSpider(scrapy.Spider):
         for ul in soup.find_all(class_='div-col'):
             for li in ul.find_all('ul'):
                 for path in li.find_all('a'):
-                    url = "{}{}".format(ROOT, path.get('href'))
+                    url = f"{ ROOT }{ path.get('href') }"
                     urls.append(url)
         # crawling urls
         for url in urls:
