@@ -3,7 +3,7 @@ Search engine using Scrapy Framework to get web data, Elasticsearch to store it,
 
 ## Windows Setup
 
-### Python setup
+### Python environment
 ```
 py -3 -m venv virtualenv
 .\virtualenv\Scripts\Activate.ps1
