@@ -2,3 +2,4 @@ __pycache__/
 wikipedia.json
 virtualenv/
 *.txt
+node_modules/
