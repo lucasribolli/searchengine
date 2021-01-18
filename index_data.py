@@ -19,7 +19,7 @@ def index():
         wikipedia = Wikipedia()
         wikipedia.url = row['url'] if 'url' in row else ''
         wikipedia.title = row['title'] if 'title' in row else ''
-        wikipedia.lastmod = format_date(row['lastmod']) if 'lastmod' in row else datetime.now()
+        wikipedia.lastmod = format_date(row['lastmod']) if 'lastmod' in row else None
         wikipedia.text = row['text'] if 'text' in row else ''
         wikipedia.save()
 
