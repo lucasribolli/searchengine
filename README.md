@@ -11,7 +11,7 @@ pip install -r requirements.txt
 ```
 
 ### Run Scrapy
-See how to install Scrapy [this](https://docs.scrapy.org/en/latest/intro/install.html)_
+See [how to install Scrapy](https://docs.scrapy.org/en/latest/intro/install.html)
 ```
 cd crawler\wikipedia
 scrapy crawl wikipedia -O data\wikipedia.json
