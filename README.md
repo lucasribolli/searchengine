@@ -18,7 +18,7 @@ scrapy crawl wikipedia -O data\wikipedia.json
 ```
 
 ### Elasticsearch
-In another terminal, install elasticsearch 7.10.1 and run it from `.bat` file.
+[Install elasticsearch 7.10.1](https://www.elastic.co/guide/en/elasticsearch/reference/7.10/install-elasticsearch.html) and in another terminal run it from `.bat` file.
 For example:
 ```
 C:\elasticsearch-7.10.1\bin\elasticsearch.bat
