@@ -11,7 +11,7 @@ pip install -r requirements.txt
 ```
 
 ### Run Scrapy
-See [how to install Scrapy](https://docs.scrapy.org/en/latest/intro/install.html)
+See [how to install Scrapy](https://docs.scrapy.org/en/latest/intro/install.html). After installed, with Anaconda/Miniconda opened go to project root and run:
 ```
 cd crawler\wikipedia
 scrapy crawl wikipedia -O data\wikipedia.json
@@ -32,7 +32,7 @@ python index_data.py
 
 ### Run Flask
 ```
-$env:FLASK_APP="backend\server.py"
+$env:FLASK_APP="backend/server.py"
 $env:FLASK_ENV="development"
 flask run --host=0.0.0.0 --port=8088
 ```

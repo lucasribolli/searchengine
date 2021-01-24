@@ -11,12 +11,12 @@ ES()
 
 @app.route('/api/search', methods=["GET"])
 def search():
-    search = request.json["search"]
+    search = request.args.get("search", type=str)
     start = request.args.get("start", type=int, default=0)
     end = request.args.get("end", type=int, default=10)
     wikipedia = Wikipedia()
     s = wikipedia.search()
-    q = Q("multi_match", 
+    q = Q("multi_match",
             query=search, 
             fields=["title", "text"])
     s = s.query(q)
