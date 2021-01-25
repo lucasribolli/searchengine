@@ -6,11 +6,15 @@ import Result from './components/Result.vue'
 import { BootstrapVue, IconsPlugin, PaginationPlugin } from 'bootstrap-vue'
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import { BLink } from 'bootstrap-vue'
+import { BSpinner } from 'bootstrap-vue'
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(Router)
 Vue.use(PaginationPlugin)
+Vue.component('b-link', BLink)
+Vue.component('b-spinner', BSpinner)
 
 const router = new Router({
   routes:[

@@ -6,3 +6,4 @@ class Wikipedia(Item):
     title = Field()
     lastmod = Field()
     text = Field()
+    accessdate = Field()

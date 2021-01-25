@@ -24,10 +24,11 @@ def search():
     data = []
     for hit in s[start:end]:
         data.append({
-            "url": hit.url if hasattr(hit, "url") else "",
-            "title": hit.title if hasattr(hit, "title") else "",
-            "lastmod": hit.lastmod if hasattr(hit, "lastmod") else "",
-            "text": hit.text if hasattr(hit, "text") else ""
+          "url": hit.url if hasattr(hit, "url") else "",
+          "title": hit.title if hasattr(hit, "title") else "",
+          "lastmod": hit.lastmod if hasattr(hit, "lastmod") else "",
+          "text": hit.text if hasattr(hit, "text") else "",
+          "accessdate": hit.accessdate if hasattr(hit, "accessdate") else "",
         })
     return jsonify({
         "data": data,

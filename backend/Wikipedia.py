@@ -9,6 +9,7 @@ class Wikipedia(Document):
     title = Text()
     lastmod = Date()
     text = Text()
+    accessdate = Date()
 
     class Index:
         name = 'wikipedia'

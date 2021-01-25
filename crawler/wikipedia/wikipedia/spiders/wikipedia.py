@@ -1,5 +1,6 @@
 import scrapy
 from wikipedia.items import Wikipedia
+from datetime import datetime
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -45,11 +46,13 @@ class WikipediaSpider(scrapy.Spider):
                     repl='', 
                     string=sentences)
                 paragraphs.append(sentences)
-        text = ' '.join(paragraphs)
+        # saving just the first 7 available paragraphs
+        text = ' '.join(paragraphs[0:7])
         wikiarticle = Wikipedia(
             url = response.url,
             title = title if title else '',
             lastmod = lastmod if lastmod else '',
-            text = text
+            text = text,
+            accessdate = datetime.now()
         )
         yield wikiarticle

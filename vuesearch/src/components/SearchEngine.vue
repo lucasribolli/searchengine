@@ -13,20 +13,35 @@
         </b-col>
       </b-row>
 
-      <Result></Result>
+      <div class="d-flex justify-content-center mb-5">
+        <b-spinner 
+          v-if="loading"
+        ></b-spinner>
+      </div>
+
+      <Result v-for="result in results"
+        :key="result.url"
+        v-bind:url="result.url"
+        v-bind:title="result.title"
+        v-bind:lastmod="result.lastmod"
+        v-bind:text="result.text"
+        v-bind:accessdate="result.accessdate"
+      ></Result>
 
       <b-row>
         <b-col md="6" class="my-1">
           <b-pagination
+            v-if="showPagination"
             @change="changePagination"
             :total-rows="rows"
             :per-page="perPage"
             v-model="currentPage"
-            class="customPagination"
             align="center"
+            class="customPagination"
           />
         </b-col>
       </b-row>
+      
     </b-container>
   </div>
 </template>
@@ -44,14 +59,15 @@ export default {
       results: [],
       rows: 5,
       query: '',
+      showPagination: false,
       perPage: 1,
-      currentPage: 1
+      currentPage: 1,
+      loading: false
     }
   },
   methods: {
     search() {
-      // alert("Searching for " + this.query);
-      console.log("searching");
+      this.loading = true;
       axios
         .get(this.$api_search, {
           params: {
@@ -59,9 +75,16 @@ export default {
           }
         })
         .then(response => {
+          this.loading = false;
           if(response.data.total > 0) {
             this.results = response.data.data.slice();
-            console.log(this.results);
+            // for (let index = 0; index < this.results.length; index++) {
+            //   console.log(this.results[index].url);
+            // }
+            this.showPagination = true;
+          }
+          else {
+            console.log("No response.");
           }
         })
         .catch(error => console.error(error));
