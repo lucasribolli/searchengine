@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container fluid>
+    <!-- <b-container fluid>
       <b-row class="my-1">
         <b-col sm="10">
           <b-form-input
@@ -42,7 +42,43 @@
         </b-col>
       </b-row>
       
-    </b-container>
+    </b-container> -->
+
+    <div class="search">
+      <b-form-input
+        id="q"
+        type="search"
+        v-model="query"
+        @keyup.enter="search">
+      </b-form-input>
+    </div>
+
+    <div class="spinner">
+      <b-spinner 
+        v-if="loading"
+      ></b-spinner>
+    </div>
+
+    <Result v-for="result in results"
+      @click="openSource(result.url)"
+      :key="result.url"
+      v-bind:url="result.url"
+      v-bind:title="result.title"
+      v-bind:lastmod="result.lastmod"
+      v-bind:text="result.text"
+      v-bind:accessdate="result.accessdate"
+    ></Result>
+
+    <b-pagination
+      v-if="showPagination"
+      @change="changePagination"
+      :total-rows="rows"
+      :per-page="perPage"
+      v-model="currentPage"
+      align="center"
+      class="customPagination"
+    />
+
   </div>
 </template>
 
@@ -98,12 +134,22 @@ export default {
 
 <style scoped>
   input[type=search] {
-    width: 50%;
-    padding: 15px 22px;
-    margin: 8px 0;
+    width: 100%;
+    padding: 15px 18px;
+    /* margin: 8px 0; */
+    margin: -30px 0 0 0;
     box-sizing: border-box;
     font-size: 20px;
-    font-family: fantasy;
+    font-family: Roboto;
+  }
+
+  .search {
+    max-width: 600px;
+    margin: 2rem auto;
+  }
+
+  .spinner {
+    position: relative;
   }
   
   /* .pagination {

@@ -13,7 +13,7 @@ ES()
 def search():
     search = request.args.get("search", type=str)
     start = request.args.get("start", type=int, default=0)
-    end = request.args.get("end", type=int, default=10)
+    end = request.args.get("end", type=int, default=3)
     wikipedia = Wikipedia()
     s = wikipedia.search()
     q = Q("multi_match",
