@@ -8,13 +8,15 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import { BLink } from 'bootstrap-vue'
 import { BSpinner } from 'bootstrap-vue'
+import { BImg } from 'bootstrap-vue'
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
-Vue.use(Router)
 Vue.use(PaginationPlugin)
+Vue.use(Router)
 Vue.component('b-link', BLink)
 Vue.component('b-spinner', BSpinner)
+Vue.component('b-img', BImg)
 
 const router = new Router({
   routes:[

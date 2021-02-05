@@ -1,49 +1,5 @@
 <template>
   <div>
-    <!-- <b-container fluid>
-      <b-row class="my-1">
-        <b-col sm="10">
-          <b-form-input
-            id="q"
-            type="search"
-            v-model="query"
-            placeholder="Search"
-            @keyup.enter="search">
-          </b-form-input>
-        </b-col>
-      </b-row>
-
-      <div class="d-flex justify-content-center mb-5">
-        <b-spinner 
-          v-if="loading"
-        ></b-spinner>
-      </div>
-
-      <Result v-for="result in results"
-        :key="result.url"
-        v-bind:url="result.url"
-        v-bind:title="result.title"
-        v-bind:lastmod="result.lastmod"
-        v-bind:text="result.text"
-        v-bind:accessdate="result.accessdate"
-      ></Result>
-
-      <b-row>
-        <b-col md="6" class="my-1">
-          <b-pagination
-            v-if="showPagination"
-            @change="changePagination"
-            :total-rows="rows"
-            :per-page="perPage"
-            v-model="currentPage"
-            align="center"
-            class="customPagination"
-          />
-        </b-col>
-      </b-row>
-      
-    </b-container> -->
-
     <div class="search">
       <b-form-input
         id="q"
@@ -53,36 +9,63 @@
       </b-form-input>
     </div>
 
+    <div
+      class="warning"
+      v-if="showWarning"
+    >
+      <div class="warningCode">{{ this.warningMessage.code }}</div>
+      <div class="warningMessage">{{ this.warningMessage.message }}</div>
+      <!-- <b-img src="src/assets/sorry.jpg"></b-img> -->
+      <!-- <img style="width:360px; margin:14px;" src="../assets/sorry.jpg"/> -->
+      <b-img 
+        fluid
+        style="max-width:200px" 
+        src="https://media.giphy.com/media/ViHbdDMcIOeLeblrbq/giphy.gif"/>
+    </div>
+
     <div class="spinner">
       <b-spinner 
         v-if="loading"
       ></b-spinner>
     </div>
 
-    <Result v-for="result in results"
-      @click="openSource(result.url)"
-      :key="result.url"
-      v-bind:url="result.url"
-      v-bind:title="result.title"
-      v-bind:lastmod="result.lastmod"
-      v-bind:text="result.text"
-      v-bind:accessdate="result.accessdate"
-    ></Result>
+    <div
+      v-if="showComponent"
+    >
+      <Result id="result-component" 
+        v-for="result in results"
+        :key="result.id"
+        v-bind:url="result.url"
+        v-bind:title="result.title"
+        v-bind:lastmod="result.lastmod"
+        v-bind:text="result.text"
+        v-bind:accessdate="result.accessdate"
+      ></Result>
+    </div>
 
-    <b-pagination
-      v-if="showPagination"
-      @change="changePagination"
-      :total-rows="rows"
-      :per-page="perPage"
-      v-model="currentPage"
-      align="center"
-      class="customPagination"
-    />
-
+    <!-- <div class="total" v-if="true">{{ this.total }} results</div> -->
+    
+    <div 
+      class="pagination"
+      v-if="showPagination">
+        <b-button
+          size="lg"
+          pill 
+          variant="outline-dark"
+          @click="changePagination('previous')"> ❮
+        </b-button>
+        <b-button
+          size="lg"
+          pill 
+          variant="outline-dark"
+          @click="changePagination('next')"> ❯
+        </b-button>
+    </div>
   </div>
 </template>
 
 <script>
+import Const from "../const/config";
 import Result from "@/components/Result.vue";
 import axios from 'axios';
 
@@ -93,40 +76,59 @@ export default {
   data() {
     return {
       results: [],
-      rows: 5,
+      total: 0,
       query: '',
       showPagination: false,
-      perPage: 1,
-      currentPage: 1,
-      loading: false
+      showComponent: false,
+      page: 0,
+      loading: false,
+      showWarning: false,
+      warningMessage: {}
     }
   },
   methods: {
     search() {
+      this.showComponent = false;
+      this.showWarning = false;
       this.loading = true;
       axios
-        .get(this.$api_search, {
-          params: {
-            search: this.query
-          }
-        })
+        .get(this.$api_search + `?q=` + this.query +`&page=` + this.page)
         .then(response => {
+          this.showComponent = true;
           this.loading = false;
           if(response.data.total > 0) {
-            this.results = response.data.data.slice();
-            // for (let index = 0; index < this.results.length; index++) {
-            //   console.log(this.results[index].url);
-            // }
             this.showPagination = true;
-          }
-          else {
-            console.log("No response.");
+            this.results = response.data.data.slice();
+            this.total =  response.data.total;
           }
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+          this.loading = false;
+          this.warning(error.response.status);
+        });
     },
-    changePagination() {
-      console.log(this.currentPage);
+    changePagination(action) {
+      if (action == "next" && this.page + Const.PER_PAGE < this.total) {
+        console.log(this.total);
+        console.log(this.page);
+        this.page++;
+        scrollTo(100, 0);
+        this.search();
+      }
+      else if (action == "previous" && this.page > 0) {
+        this.page--;
+        scrollTo(100, 0);
+        this.search();
+      }
+    },
+    warning(status) {
+      if (status === 404) {
+        this.warningMessage.code = Const.WARNING.code;
+        this.warningMessage.message = Const.WARNING.message;
+        this.showComponent = false;
+        this.showPagination = false;
+        this.showWarning = true;
+      }
     }
   }
 }
@@ -136,7 +138,6 @@ export default {
   input[type=search] {
     width: 100%;
     padding: 15px 18px;
-    /* margin: 8px 0; */
     margin: -30px 0 0 0;
     box-sizing: border-box;
     font-size: 20px;
@@ -144,20 +145,43 @@ export default {
   }
 
   .search {
-    max-width: 600px;
+    max-width: 800px;
     margin: 2rem auto;
+  }
+
+  .total {
+    /* width: 192%; */
+    font-size: 12px;
+    font-family: Roboto;
   }
 
   .spinner {
     position: relative;
   }
+
+  .pagination {
+    margin: 2rem auto;
+    width: 10%;
+    padding: 10px;
+  }
   
-  /* .pagination {
-    width: 50%;
-    padding: 15px 22px;
-    margin: 8px 0;
+  .pagination button{
+    margin: 0px 5px;
+    /* width: 50%; */
     box-sizing: border-box;
+    font-size: 15px;
+    /* font-family: Roboto; */
+  }
+
+  .warningCode{
+    font-size: 50px;
+    font-weight: 850;
+    font-family: Roboto;
+  }
+
+  .warningMessage{
     font-size: 20px;
-    font-family: fantasy;
-  } */
+    font-weight: 500;
+    font-family: Roboto;
+  }
 </style>
