@@ -47,7 +47,7 @@
     
     <div 
       class="pagination"
-      v-if="showPagination">
+      v-if="pagination">
         <b-button
           size="lg"
           pill 
@@ -129,6 +129,14 @@ export default {
         this.showPagination = false;
         this.showWarning = true;
       }
+    }
+  },
+  computed: {
+    pagination() {
+      if (this.total > Const.PER_PAGE) {
+        return true;
+      }
+      return false;
     }
   }
 }
