@@ -1,5 +1,6 @@
 <template>
   <div>
+    <img class="logo" src="../assets/logo.png"/>
     <div class="search">
       <b-form-input
         id="q"
@@ -9,19 +10,12 @@
       </b-form-input>
     </div>
 
-    <div
-      class="warning"
+    
+    <Warning
       v-if="showWarning"
-    >
-      <div class="warningCode">{{ this.warningMessage.code }}</div>
-      <div class="warningMessage">{{ this.warningMessage.message }}</div>
-      <!-- <b-img src="src/assets/sorry.jpg"></b-img> -->
-      <!-- <img style="width:360px; margin:14px;" src="../assets/sorry.jpg"/> -->
-      <b-img 
-        fluid
-        style="max-width:200px" 
-        src="https://media.giphy.com/media/ViHbdDMcIOeLeblrbq/giphy.gif"/>
-    </div>
+      v-bind:code="warningMessage.code"
+      v-bind:message="warningMessage.message"
+    ></Warning>
 
     <div class="spinner">
       <b-spinner 
@@ -67,11 +61,13 @@
 <script>
 import Const from "../const/config";
 import Result from "@/components/Result.vue";
+import Warning from "@/views/Warning";
 import axios from 'axios';
 
 export default {
   components: {
-    Result
+    Result,
+    Warning
   },
   data() {
     return {
@@ -143,18 +139,23 @@ export default {
 </script>
 
 <style scoped>
-  input[type=search] {
-    width: 100%;
-    padding: 15px 18px;
-    margin: -30px 0 0 0;
-    box-sizing: border-box;
-    font-size: 20px;
-    font-family: Roboto;
+  .logo {
+    width:200px;
+    margin:14px 555px;
+    /* text-align: center; */
+    margin-top: 40px;
   }
 
-  .search {
+  input[type=search] {
+    width: 80%;
+    padding: 15px 18px;
+    margin: -30px 70px;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Roboto;
+    
     max-width: 800px;
-    margin: 2rem auto;
+    margin: 0rem auto;
   }
 
   .total {
@@ -164,7 +165,9 @@ export default {
   }
 
   .spinner {
-    position: relative;
+    /* position: relative; */
+    padding: 80px 560px;
+    margin: -30px 70px;
   }
 
   .pagination {

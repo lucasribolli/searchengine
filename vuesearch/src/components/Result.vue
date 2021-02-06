@@ -44,6 +44,7 @@ export default {
   }
 
   .result-text {
+    font-size: 15px;
     text-align:justify;
     margin: -12px 0 0 0;
   }
