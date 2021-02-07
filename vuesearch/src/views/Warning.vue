@@ -5,8 +5,6 @@
         >
         <h3 class="warningCode">{{ this.code }}</h3>
         <div class="warningMessage">{{ this.message }}</div>
-        <!-- <b-img src="src/assets/sorry.jpg"></b-img> -->
-        <!-- <img style="width:360px; margin:14px;" src="../assets/sorry.jpg"/> -->
         <b-img 
             fluid
             class="image" 
@@ -41,7 +39,7 @@ export default {
     font-weight: 500;
     font-family: Roboto;
 
-    margin: 5px 0px 0px 465px;
+    margin: 5px 0px 0px 500px;
     box-sizing: border-box;
   }
 

@@ -17,7 +17,7 @@ RESULT_PER_PAGE = 3
 
 """
 GET /api/search
-data: List with elasticsearch hits
+data: List with elasticsearch dict hits
 total: Int with total of hits
 """
 @app.route('/api/search', methods=["GET"])
@@ -34,16 +34,18 @@ def search():
     data = []
     for hit in s[start:end]:
         data.append({
-          "id": hit.meta.id,
-          "url": hit.url if hasattr(hit, "url") else "",
-          "title": hit.title if hasattr(hit, "title") else "",
-          "lastmod": hit.lastmod if hasattr(hit, "lastmod") else "",
-          "text": hit.text if hasattr(hit, "text") else "",
-          "accessdate": hit.accessdate if hasattr(hit, "accessdate") else "",
+        "id": hit.meta.id,
+        "url": hit.url if hasattr(hit, "url") else "",
+        "title": hit.title if hasattr(hit, "title") else "",
+        "lastmod": hit.lastmod if hasattr(hit, "lastmod") else "",
+        "text": hit.text if hasattr(hit, "text") else "",
+        "accessdate": hit.accessdate if hasattr(hit, "accessdate") else "",
         })
     if s.count() > 0:
         return jsonify({
             "data": data,
             "total": s.count(),
         })
-    abort(404)
+    else:
+        abort(404)
+    

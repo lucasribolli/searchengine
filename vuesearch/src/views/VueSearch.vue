@@ -1,6 +1,8 @@
 <template>
   <div>
-    <img style="width:360px; margin:14px 500px; text-align: center; margin-top: 60px;" src="../assets/logo.png"/>
+    <img
+      style="width:360px; margin:14px 500px; text-align: center; margin-top: 60px;" 
+      src="../assets/logo.png"/>
     <div class="search">
       <b-form-input
         id="q"
@@ -9,13 +11,25 @@
         @keyup.enter="search">
       </b-form-input>
     </div>
-    <a>http://localhost:8080/search:Python</a>
+    <!-- <a>http://localhost:8080/search:Python</a> -->
   </div>
 </template>
 
 <script>
 export default {
-    name: 'Home'
+    name: 'VueSearch',
+    data() {
+      return {
+        query: ''
+      }
+    },
+    methods: {
+      search() {
+        this.$router.push(
+          { name: 'search', params: { q: this.query } }
+        );
+      }
+    }
 }
 </script>
 

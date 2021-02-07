@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img class="logo" src="../assets/logo.png"/>
+    <img @click="goToRoot" class="logo" src="../assets/logo.png"/>
     <div class="search">
       <b-form-input
         id="q"
@@ -10,16 +10,14 @@
       </b-form-input>
     </div>
 
-    
     <Warning
       v-if="showWarning"
       v-bind:code="warningMessage.code"
       v-bind:message="warningMessage.message"
     ></Warning>
 
-    <div class="spinner">
+    <div v-if="loading" class="spinner">
       <b-spinner 
-        v-if="loading"
       ></b-spinner>
     </div>
 
@@ -35,13 +33,8 @@
         v-bind:text="result.text"
         v-bind:accessdate="result.accessdate"
       ></Result>
-    </div>
-
-    <!-- <div class="total" v-if="true">{{ this.total }} results</div> -->
-    
-    <div 
-      class="pagination"
-      v-if="pagination">
+      <div 
+      class="pagination">
         <b-button
           size="lg"
           pill 
@@ -54,6 +47,7 @@
           variant="outline-dark"
           @click="changePagination('next')"> ❯
         </b-button>
+      </div>
     </div>
   </div>
 </template>
@@ -69,18 +63,24 @@ export default {
     Result,
     Warning
   },
+  props: {
+    q: { type: String}
+  },
   data() {
     return {
       results: [],
       total: 0,
       query: '',
-      showPagination: false,
       showComponent: false,
       page: 0,
       loading: false,
       showWarning: false,
       warningMessage: {}
     }
+  },
+  mounted(){
+    this.query = this.q;
+    this.search();
   },
   methods: {
     search() {
@@ -93,20 +93,24 @@ export default {
           this.showComponent = true;
           this.loading = false;
           if(response.data.total > 0) {
-            this.showPagination = true;
             this.results = response.data.data.slice();
             this.total =  response.data.total;
+            this.$router.push({ name: 'search', params: { q: this.query } });
           }
         })
         .catch(error => {
           this.loading = false;
-          this.warning(error.response.status);
+          console.log(error.response);
+          if (error.response) {
+            this.warning(error.response.status);             
+          }
+          else {
+            this.warning();
+          }
         });
     },
     changePagination(action) {
-      if (action == "next" && this.page + Const.PER_PAGE < this.total) {
-        console.log(this.total);
-        console.log(this.page);
+      if (action == "next" && (this.page + Const.PER_PAGE + 1) < this.total) {
         this.page++;
         scrollTo(100, 0);
         this.search();
@@ -117,14 +121,23 @@ export default {
         this.search();
       }
     },
-    warning(status) {
-      if (status === 404) {
-        this.warningMessage.code = Const.WARNING.code;
-        this.warningMessage.message = Const.WARNING.message;
-        this.showComponent = false;
-        this.showPagination = false;
-        this.showWarning = true;
+    warning(code) {
+      this.showComponent = false;
+      this.showWarning = true;
+      if (code) {
+        if (code === 404) {
+          this.warningMessage.code = code;
+          this.warningMessage.message = "I'm sorry, the query was not found.";
+          this.$router.push({ name: 'warning', params: { code: code } });
+        }
+      } else {
+        this.warningMessage.code = 500;
+        this.warningMessage.message = "I'm sorry, something unexpected has happened.";
+        this.$router.push({ name: 'warning', params: { code: this.warningMessage.code } });
       }
+    },
+    goToRoot() {
+      this.$router.push({ name: 'vuesearch'});
     }
   },
   computed: {
@@ -182,17 +195,5 @@ export default {
     box-sizing: border-box;
     font-size: 15px;
     /* font-family: Roboto; */
-  }
-
-  .warningCode{
-    font-size: 50px;
-    font-weight: 850;
-    font-family: Roboto;
-  }
-
-  .warningMessage{
-    font-size: 20px;
-    font-weight: 500;
-    font-family: Roboto;
   }
 </style>
