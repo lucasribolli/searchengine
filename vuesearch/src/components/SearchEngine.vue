@@ -22,7 +22,7 @@
     </div>
 
     <div
-      v-if="showComponent"
+      v-if="showResult"
     >
       <Result id="result-component" 
         v-for="result in results"
@@ -71,7 +71,7 @@ export default {
       results: [],
       total: 0,
       query: '',
-      showComponent: false,
+      showResult: false,
       page: 0,
       loading: false,
       showWarning: false,
@@ -84,13 +84,13 @@ export default {
   },
   methods: {
     search() {
-      this.showComponent = false;
+      this.showResult = false;
       this.showWarning = false;
       this.loading = true;
       axios
         .get(this.$api_search + `?q=` + this.query +`&page=` + this.page)
         .then(response => {
-          this.showComponent = true;
+          this.showResult = true;
           this.loading = false;
           if(response.data.total > 0) {
             this.results = response.data.data.slice();
@@ -122,7 +122,7 @@ export default {
       }
     },
     warning(code) {
-      this.showComponent = false;
+      this.showResult = false;
       this.showWarning = true;
       if (code) {
         if (code === 404) {
