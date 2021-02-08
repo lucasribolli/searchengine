@@ -70,7 +70,7 @@ export default {
     return {
       results: [],
       total: 0,
-      query: '',
+      query: null,
       showResult: false,
       page: 0,
       loading: false,
@@ -84,30 +84,32 @@ export default {
   },
   methods: {
     search() {
-      this.showResult = false;
-      this.showWarning = false;
-      this.loading = true;
-      axios
-        .get(this.$api_search + `?q=` + this.query +`&page=` + this.page)
-        .then(response => {
-          this.showResult = true;
-          this.loading = false;
-          if(response.data.total > 0) {
-            this.results = response.data.data.slice();
-            this.total =  response.data.total;
-            this.$router.push({ name: 'search', params: { q: this.query } });
-          }
-        })
-        .catch(error => {
-          this.loading = false;
-          console.log(error.response);
-          if (error.response) {
-            this.warning(error.response.status);             
-          }
-          else {
-            this.warning();
-          }
+      if (this.query) {
+        this.showResult = false;
+        this.showWarning = false;
+        this.loading = true;
+        axios
+          .get(this.$api_search + `?q=` + this.query +`&page=` + this.page)
+          .then(response => {
+            this.showResult = true;
+            this.loading = false;
+            if(response.data.total > 0) {
+              this.results = response.data.data.slice();
+              this.total =  response.data.total;
+              this.$router.push({ name: 'search', params: { q: this.query } });
+            }
+          })
+          .catch(error => {
+            this.loading = false;
+            console.log(error.response);
+            if (error.response) {
+              this.warning(error.response.status);             
+            }
+            else {
+              this.warning();
+            }
         });
+      }
     },
     changePagination(action) {
       if (action == "next" && (this.page + Const.PER_PAGE + 1) < this.total) {
