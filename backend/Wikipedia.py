@@ -1,5 +1,5 @@
 from elasticsearch_dsl import Document, Text, Date, Keyword
-from . import ES
+from ES import ES
 
 
 ES()

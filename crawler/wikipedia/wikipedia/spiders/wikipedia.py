@@ -47,7 +47,7 @@ class WikipediaSpider(scrapy.Spider):
                     string=sentences)
                 paragraphs.append(sentences)
         # saving just the first 7 available paragraphs
-        text = ' '.join(paragraphs[0:7])
+        text = ' '.join(paragraphs)
         wikiarticle = Wikipedia(
             url = response.url,
             title = title if title else '',
