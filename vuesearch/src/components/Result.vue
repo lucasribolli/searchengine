@@ -3,7 +3,7 @@
     <div class="result-info">
         <h4 class="result-title"> {{ this.title }} </h4>
         <p class="result-url"> <b-link :href="url" target="_blank">{{ this.url }}</b-link> </p>
-        <p class="result-text"> {{ this.text }} </p>
+        <p class="result-text"> {{ this.formatText }} </p>
         <p class="result-date"> last mod: {{ this.lastmod }} | access date: {{ this.accessdate }} </p>
     </div>
   </div>
@@ -19,9 +19,6 @@ export default {
     lastmod: { type: Date },
     text: { type: String },
     accessdate: { type: Date }
-  },
-
-  methods: {
   }
 }
 
@@ -29,7 +26,6 @@ export default {
 
 <style scoped>
   .result-content {
-    /* display:flex; */
     width: 80%;
     text-align: left;
     max-width: 800px;
@@ -39,7 +35,6 @@ export default {
 
   .result-url {
     position: relative;
-    /* width: 50%; */
     bottom: 1px;
   }
 
@@ -52,6 +47,5 @@ export default {
   .result-date {
     font-size: 12px;
     padding-top: 5px;
-    /* line-height: 100%; */
   }
 </style>

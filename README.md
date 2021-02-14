@@ -32,16 +32,13 @@ C:\elasticsearch-7.10.1\bin\elasticsearch.bat
 ### Run index_data.py
 Be careful to not run twice.
 ```
-cd ..\..
+cd backend
 ```
 ```
 py index_data.py
 ```
 
 ### Run Flask
-```
-cd backend
-```
 ```
 $env:FLASK_APP="server.py"
 ```

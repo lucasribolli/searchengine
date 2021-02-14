@@ -6,8 +6,8 @@ from flask import Flask, jsonify, request, abort
 from elasticsearch_dsl import Q
 from elasticsearch.exceptions import ConnectionError
 from flask_cors import CORS
-from . import Wikipedia
-from . import ES
+from .Wikipedia import Wikipedia
+from .ES import ES
 
 
 app = Flask(__name__)
@@ -41,7 +41,7 @@ def search():
                 "url": hit.url if hasattr(hit, "url") else "",
                 "title": hit.title if hasattr(hit, "title") else "",
                 "lastmod": hit.lastmod if hasattr(hit, "lastmod") else "",
-                "text": hit.text if hasattr(hit, "text") else "",
+                "text": ' '.join(hit.text.split(' ')[:10]) if hasattr(hit, "text") else "",
                 "accessdate": hit.accessdate if hasattr(hit, "accessdate") else "",
                 })
             return jsonify({
