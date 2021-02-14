@@ -8,7 +8,12 @@ import Warning from '@/views/Warning';
 Vue.use(Router);
 
 const router = new Router({
+    mode: 'history',
     routes: [
+      { 
+        path: '*', 
+        redirect: '/' 
+      },
       {
         path: '/',
         name: 'vuesearch',

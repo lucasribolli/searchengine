@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a href="" @click="goToRoot">
+    <a href="" @click="goToHome">
       <img class="logo" src="../assets/logo.png"/>
     </a>
     <div class="search">
@@ -112,6 +112,9 @@ export default {
             }
         });
       }
+      else {
+        this.goToHome();
+      }
     },
     changePagination(action) {
       if (action == "next" && (this.page + Const.PER_PAGE + 1) < this.total) {
@@ -142,7 +145,7 @@ export default {
         break;
       }
     },
-    goToRoot() {
+    goToHome() {
       this.$router.push({ name: 'vuesearch'});
     }
   },

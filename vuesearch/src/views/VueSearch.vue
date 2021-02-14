@@ -28,6 +28,9 @@ export default {
           { name: 'search', params: { q: this.query } }
         );
       }
+    },
+    mounted() {
+      this.$router.replace({ path: '*', redirect: '/' });
     }
 }
 </script>
