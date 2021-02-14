@@ -1,12 +1,16 @@
 # searchengine
-Search engine using Scrapy Framework to get web data, Elasticsearch to store it, Flask as backend and Vuejs Framework to search and visualizate it.
+Search engine using Scrapy Framework to get web data, Elasticsearch to store it, Flask as backend and Vuejs Framework to visualizate it.
 
 ## Windows 10 Setup
 
 ### Python environment
 ```
-python -3 -m venv virtualenv
+py -3 -m venv virtualenv
+```
+```
 .\virtualenv\Scripts\Activate.ps1
+```
+```
 pip install -r requirements.txt
 ```
 
@@ -14,6 +18,8 @@ pip install -r requirements.txt
 See [how to install Scrapy](https://docs.scrapy.org/en/latest/intro/install.html). After installed, with Anaconda/Miniconda opened go to project root and run:
 ```
 cd crawler\wikipedia
+```
+```
 scrapy crawl wikipedia -O data\wikipedia.json
 ```
 
@@ -27,14 +33,26 @@ C:\elasticsearch-7.10.1\bin\elasticsearch.bat
 Be careful to not run twice.
 ```
 cd ..\..
-python index_data.py
+```
+```
+py index_data.py
 ```
 
 ### Run Flask
 ```
 cd backend
+```
+```
 $env:FLASK_APP="server.py"
+```
+```
 $env:FLASK_ENV="development"
+```
+```
 flask run --host=0.0.0.0 --port=8088
 ```
+
+### Vue environment
+
+
 
