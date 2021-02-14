@@ -25,7 +25,7 @@ export default {
 
 <style scoped>
   .warning{
-    margin-top: 12px;
+    margin-top: 15px;
   }
 
   .warningCode{
@@ -34,9 +34,6 @@ export default {
     font-family: Roboto;
 
     text-align: center;
-    /* min-height: 100vh;
-    display: flex;
-    flex-direction: row; */
     align-items: center;
   }
 
@@ -54,6 +51,5 @@ export default {
       display: block;
       margin-left: auto;
       margin-right: auto;
-      /* width: 15%; */
   }
 </style>

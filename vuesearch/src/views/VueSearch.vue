@@ -24,9 +24,11 @@ export default {
     },
     methods: {
       search() {
-        this.$router.push(
-          { name: 'search', params: { q: this.query } }
-        );
+        if (this.query) {
+          this.$router.push(
+            { name: 'search', params: { q: this.query } }
+          );
+        }
       }
     },
     mounted() {

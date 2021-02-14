@@ -174,7 +174,7 @@ export default {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     width: 80%;
 
     box-sizing: border-box;
@@ -204,9 +204,7 @@ export default {
   
   .pagination button{
     margin: 0px 5px;
-    /* width: 50%; */
     box-sizing: border-box;
     font-size: 15px;
-    /* font-family: Roboto; */
   }
 </style>
