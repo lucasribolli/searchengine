@@ -52,7 +52,19 @@ $env:FLASK_ENV="development"
 flask run --host=0.0.0.0 --port=8088
 ```
 
-### Vue environment
+### Vuejs environment
+With [Node.js](https://nodejs.org/) installed, in another terminal, run: 
+```
+cd vuesearch
+```
+```
+npm install
+```
+```
+npm run serve
+```
+
+
 
 
 

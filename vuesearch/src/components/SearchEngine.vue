@@ -1,6 +1,8 @@
 <template>
   <div>
-    <img @click="goToRoot" class="logo" src="../assets/logo.png"/>
+    <a href="" @click="goToRoot">
+      <img class="logo" src="../assets/logo.png"/>
+    </a>
     <div class="search">
       <b-form-input
         id="q"
@@ -101,7 +103,7 @@ export default {
           })
           .catch(error => {
             this.loading = false;
-            console.log(error.response);
+            console.log(error.response.status);
             if (error.response) {
               this.warning(error.response.status);             
             }
@@ -126,16 +128,18 @@ export default {
     warning(code) {
       this.showResult = false;
       this.showWarning = true;
-      if (code) {
-        if (code === 404) {
+      switch (code) {
+        case 404:
           this.warningMessage.code = code;
           this.warningMessage.message = "I'm sorry, the query was not found.";
           this.$router.push({ name: 'warning', params: { code: code } });
-        }
-      } else {
-        this.warningMessage.code = 500;
-        this.warningMessage.message = "I'm sorry, something unexpected has happened.";
-        this.$router.push({ name: 'warning', params: { code: this.warningMessage.code } });
+          break;
+        case 500:
+          default:
+          this.warningMessage.code = 500;
+          this.warningMessage.message = "I'm sorry, something unexpected has happened.";
+          this.$router.push({ name: 'warning', params: { code: this.warningMessage.code } });
+        break;
       }
     },
     goToRoot() {
@@ -155,16 +159,21 @@ export default {
 
 <style scoped>
   .logo {
-    width:200px;
-    margin:14px 555px;
-    /* text-align: center; */
-    margin-top: 40px;
+    max-width:200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    margin-bottom: 8px;
   }
 
   input[type=search] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
     width: 80%;
-    padding: 15px 18px;
-    margin: -30px 70px;
+
     box-sizing: border-box;
     font-size: 16px;
     font-family: Roboto;
@@ -174,15 +183,14 @@ export default {
   }
 
   .total {
-    /* width: 192%; */
     font-size: 12px;
     font-family: Roboto;
   }
 
   .spinner {
-    /* position: relative; */
-    padding: 80px 560px;
-    margin: -30px 70px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
   }
 
   .pagination {

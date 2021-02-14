@@ -1,7 +1,7 @@
 <template>
   <div>
     <img
-      style="width:360px; margin:14px 500px; text-align: center; margin-top: 60px;" 
+      class="logo" 
       src="../assets/logo.png"/>
     <div class="search">
       <b-form-input
@@ -11,7 +11,6 @@
         @keyup.enter="search">
       </b-form-input>
     </div>
-    <!-- <a>http://localhost:8080/search:Python</a> -->
   </div>
 </template>
 
@@ -34,17 +33,30 @@ export default {
 </script>
 
 <style scoped>
+  .logo{
+    display: block;
+    width:360px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-top: 60px;
+  }
+
   input[type=search] {
-    width: 100%;
+    display: block;
+    width: 360px;
+
     padding: 15px 18px;
-    margin: -30px 0 0 0;
-    box-sizing: border-box;
+    width: 100%;
     font-size: 20px;
     font-family: Roboto;
   }
 
   .search {
     max-width: 800px;
-    margin: 2rem auto;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
   }
 </style>

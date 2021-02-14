@@ -3,12 +3,12 @@
         <div
             class="warning"
         >
-        <h3 class="warningCode">{{ this.code }}</h3>
-        <div class="warningMessage">{{ this.message }}</div>
-        <b-img 
-            fluid
-            class="image" 
-            src="https://media.giphy.com/media/ViHbdDMcIOeLeblrbq/giphy.gif"/>
+          <h3 class="warningCode">{{ this.code }}</h3>
+          <div class="warningMessage">{{ this.message }}</div>
+          <b-img 
+              fluid
+              class="image"
+              src="https://media.giphy.com/media/ViHbdDMcIOeLeblrbq/giphy.gif"/>
         </div>
   </div>
 </template>
@@ -24,14 +24,20 @@ export default {
 </script>
 
 <style scoped>
+  .warning{
+    margin-top: 12px;
+  }
+
   .warningCode{
     font-size: 70px;
     font-weight: 850;
     font-family: Roboto;
 
-    padding: 0px 520px;
-    margin: 20px 70px;
-    box-sizing: border-box;
+    text-align: center;
+    /* min-height: 100vh;
+    display: flex;
+    flex-direction: row; */
+    align-items: center;
   }
 
   .warningMessage{
@@ -39,13 +45,15 @@ export default {
     font-weight: 500;
     font-family: Roboto;
 
-    margin: 5px 0px 0px 500px;
-    box-sizing: border-box;
+    text-align: center;
+    align-items: center;
   }
 
   .image {
       max-width:200px;
-      margin: 10px 0px 0px 560px;
-      /* text-align: center; */
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      /* width: 15%; */
   }
 </style>
