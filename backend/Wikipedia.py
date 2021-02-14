@@ -1,4 +1,4 @@
-from elasticsearch_dsl import Document, Text, Date
+from elasticsearch_dsl import Document, Text, Date, Keyword
 from . import ES
 
 
@@ -8,7 +8,7 @@ class Wikipedia(Document):
     url = Text()
     title = Text()
     lastmod = Date()
-    text = Text()
+    text = Keyword()
     accessdate = Date()
 
     class Index:
