@@ -6,15 +6,20 @@ from flask import Flask, jsonify, request, abort
 from elasticsearch_dsl import Q
 from elasticsearch.exceptions import ConnectionError
 from flask_cors import CORS
-from .Wikipedia import Wikipedia
-from .ES import ES
+from os.path import join
+from backend.Wikipedia import Wikipedia
+from backend.ES import ES
 
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 ES()
 
-RESULT_PER_PAGE = 3
+RESULT_PER_PAGE = 10
+
+## return first 40 words
+def format_text(text):
+    return ' '.join(text.split(' ')[:40]).strip()
 
 """
 GET /api/search
@@ -41,7 +46,7 @@ def search():
                 "url": hit.url if hasattr(hit, "url") else "",
                 "title": hit.title if hasattr(hit, "title") else "",
                 "lastmod": hit.lastmod if hasattr(hit, "lastmod") else "",
-                "text": ' '.join(hit.text.split(' ')[:10]) if hasattr(hit, "text") else "",
+                "text": format_text(hit.text) if hasattr(hit, "text") else "",
                 "accessdate": hit.accessdate if hasattr(hit, "accessdate") else "",
                 })
             return jsonify({

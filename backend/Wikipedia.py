@@ -1,5 +1,9 @@
 from elasticsearch_dsl import Document, Text, Date, Keyword
-from ES import ES
+from os.path import join
+try:
+    from backend.ES import ES
+except ModuleNotFoundError:
+    from ES import ES
 
 
 ES()

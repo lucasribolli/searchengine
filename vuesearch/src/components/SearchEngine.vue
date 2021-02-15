@@ -112,9 +112,6 @@ export default {
             }
         });
       }
-      else {
-        this.goToHome();
-      }
     },
     changePagination(action) {
       if (action == "next" && (this.page + Const.PER_PAGE + 1) < this.total) {

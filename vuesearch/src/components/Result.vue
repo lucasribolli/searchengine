@@ -3,7 +3,7 @@
     <div class="result-info">
         <h4 class="result-title"> {{ this.title }} </h4>
         <p class="result-url"> <b-link :href="url" target="_blank">{{ this.url }}</b-link> </p>
-        <p class="result-text"> {{ this.formatText }} </p>
+        <p class="result-text"> {{ this.text }} </p>
         <p class="result-date"> last mod: {{ this.lastmod }} | access date: {{ this.accessdate }} </p>
     </div>
   </div>
@@ -19,6 +19,9 @@ export default {
     lastmod: { type: Date },
     text: { type: String },
     accessdate: { type: Date }
+  },
+  mounted() {
+    console.log(this.text);
   }
 }
 

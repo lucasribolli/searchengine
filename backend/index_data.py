@@ -5,6 +5,7 @@ from datetime import datetime
 from Wikipedia import Wikipedia
 from ES import ES
 
+
 def _format_date(lastmod):
     date = lastmod.split("This page was last edited on")[-1].split(', at')[0].strip()
     time =  lastmod.split("This page was last edited on")[-1].split(', at')[-1].strip()
@@ -24,7 +25,8 @@ def _index():
         wikipedia.accessdate = row['accessdate'] if 'accessdate' in row else datetime.now()
         wikipedia.save()
     
-    return i
+    ## return with plus 1 because iterrows function start with key 0
+    return i + 1
 
 if __name__=="__main__":
     try:
