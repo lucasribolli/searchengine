@@ -116,12 +116,10 @@ export default {
     changePagination(action) {
       if (action == "next" && (this.page + Const.PER_PAGE + 1) < this.total) {
         this.page++;
-        scrollTo(100, 0);
         this.search();
       }
       else if (action == "previous" && this.page > 0) {
         this.page--;
-        scrollTo(100, 0);
         this.search();
       }
     },
