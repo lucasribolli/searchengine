@@ -34,7 +34,7 @@ C:\elasticsearch-7.10.1\bin\elasticsearch.bat
 ```
 
 ### Run index_data.py
-Be careful to not run twice.
+Be careful to not run it twice.
 ```
 cd backend
 ```

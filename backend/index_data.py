@@ -25,7 +25,7 @@ def _index():
         wikipedia.accessdate = row['accessdate'] if 'accessdate' in row else datetime.now()
         wikipedia.save()
     
-    ## return with plus 1 because iterrows function start with key 0
+    ## return with plus 1 because iterrows function starts with key 0
     return i + 1
 
 if __name__=="__main__":
