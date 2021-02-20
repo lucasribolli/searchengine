@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import Const from "../const/config";
 import Result from "@/components/Result.vue";
 import Warning from "@/views/Warning";
 import axios from 'axios';
@@ -96,7 +95,7 @@ export default {
             this.showResult = true;
             this.loading = false;
             if(response.data.total > 0) {
-              this.results = response.data.data.slice();
+              this.results = [...response.data.data];
               this.total =  response.data.total;
               this.$router.push({ name: 'search', params: { q: this.query } });
             }
@@ -106,15 +105,14 @@ export default {
             console.log(error.response.status);
             if (error.response) {
               this.warning(error.response.status);             
-            }
-            else {
+            } else {
               this.warning();
             }
         });
       }
     },
     changePagination(action) {
-      if (action == "next" && (this.page + Const.PER_PAGE + 1) < this.total) {
+      if (action == "next" && (this.page + this.$per_page + 1) < this.total) {
         this.page++;
         this.search();
       }
@@ -146,7 +144,7 @@ export default {
   },
   computed: {
     pagination() {
-      if (this.total > Const.PER_PAGE) {
+      if (this.total > this.$per_page) {
         return true;
       }
       return false;

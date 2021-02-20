@@ -30,8 +30,9 @@ def _index():
 
 if __name__=="__main__":
     try:
-        print("Indexing...", end="\r")
+        Wikipedia().init()
         ES()
+        print("Indexing...", end="\r")
         indexed = _index()
         print(f"Indexed {indexed} content(s) successfully!")
     except Exception as ex:
