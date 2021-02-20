@@ -44,7 +44,7 @@ py index_data.py
 
 ### Run Flask
 ```
-$env:FLASK_APP="server.py"
+$env:FLASK_APP="serve.py"
 ```
 ```
 $env:FLASK_ENV="development"
