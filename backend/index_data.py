@@ -13,7 +13,7 @@ def _format_date(lastmod):
     datetime_obj = datetime.strptime(datetime_str, '%d %B %Y %H:%M')
     return datetime_obj
 
-def _index():
+def index():
     wikipedia_data = pd.read_json(join("..","crawler","wikipedia","data","wikipedia.json"))
 
     for i, row in wikipedia_data.iterrows():
@@ -30,10 +30,10 @@ def _index():
 
 if __name__=="__main__":
     try:
-        Wikipedia().init()
         ES()
+        Wikipedia().init()
         print("Indexing...", end="\r")
-        indexed = _index()
+        indexed = index()
         print(f"Indexed {indexed} content(s) successfully!")
     except Exception as ex:
         print(ex)

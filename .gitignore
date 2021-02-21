@@ -3,3 +3,4 @@ wikipedia.json
 virtualenv/
 ann.md
 node_modules/
+jupyter/

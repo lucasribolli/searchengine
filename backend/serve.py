@@ -36,7 +36,11 @@ def search():
 
         wikipedia = Wikipedia()
         s = wikipedia.search()
-        s = s.query("match", text=search)
+        q = Q("multi_match", 
+            query=search, 
+            fields=["title", "text"])
+        s = s.query(q)
+        # s = s.query("match", text=search)
         # s = s.sort('-lastmod')
         if s.count() > 0:
             data = []

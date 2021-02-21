@@ -94,11 +94,9 @@ export default {
           .then(response => {
             this.showResult = true;
             this.loading = false;
-            if(response.data.total > 0) {
-              this.results = [...response.data.data];
-              this.total =  response.data.total;
-              this.$router.push({ name: 'search', params: { q: this.query } });
-            }
+            this.results = [...response.data.data];
+            this.total =  response.data.total;
+            this.$router.push({ name: 'search', params: { q: this.query } });
           })
           .catch(error => {
             this.loading = false;

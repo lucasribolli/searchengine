@@ -10,7 +10,7 @@ ES()
 
 class Wikipedia(Document):
     url = Text()
-    title = Text()
+    title = Keyword()
     lastmod = Date()
     text = Keyword()
     accessdate = Date()
