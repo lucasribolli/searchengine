@@ -68,7 +68,7 @@ class WikipediaSpider(scrapy.Spider):
                     repl='', 
                     string=sentences)
                 paragraphs.append(sentences)
-        text = ' '.join(paragraphs[:12])
+        text = ' '.join(paragraphs)
         wikiarticle = Wikipedia(
             url = response.url,
             title = title if title else '',
