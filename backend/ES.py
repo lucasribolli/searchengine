@@ -12,4 +12,7 @@ class ES:
           host = config['elastic']['host']
           port = config['elastic']['port']
 
-        connections.create_connection(host=host, port=port)
+        self.connection = connections.create_connection(host=host, port=port)
+    
+    def get_client(self):
+      return self.connection
