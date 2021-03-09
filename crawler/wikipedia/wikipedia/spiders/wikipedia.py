@@ -12,7 +12,8 @@ class WikipediaSpider(scrapy.Spider):
     """
     Getting urls in two different pages
     """
-    def _urls(self):
+    @staticmethod
+    def _urls():
         ROOT = "https://en.wikipedia.org"
         page_urls = {
             "prog_lang": f"{ ROOT }/wiki/List_of_programming_languages",
@@ -41,7 +42,7 @@ class WikipediaSpider(scrapy.Spider):
         return urls
 
     def start_requests(self):
-        urls = self._urls()
+        urls = WikipediaSpider()._urls()
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
 
@@ -68,12 +69,12 @@ class WikipediaSpider(scrapy.Spider):
                     repl='', 
                     string=sentences)
                 paragraphs.append(sentences)
-        text = ' '.join(paragraphs)
+        text = ' '.join(paragraphs[:10])
         wikiarticle = Wikipedia(
-            url = response.url,
-            title = title if title else '',
-            lastmod = lastmod if lastmod else '',
-            text = text,
+            url = response.url if response.url else None,
+            title = title if title else None,
+            lastmod = lastmod if lastmod else None,
+            text = text if text else None,
             accessdate = datetime.now()
         )
         yield wikiarticle

@@ -1,6 +1,7 @@
 __pycache__/
+node_modules/
 wikipedia.json
 virtualenv/
 .ideia
-node_modules/
 jupyter/
+.vscode/

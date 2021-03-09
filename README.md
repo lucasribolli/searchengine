@@ -1,10 +1,6 @@
 # searchengine
 Search engine using Scrapy Framework to get web data, Elasticsearch to store it, Flask as backend and Vuejs Framework to visualizate it.
 
-<p align="center">
-  <img src="vuesearch.gif" alt="animated" />
-</p>
-
 ## Windows 10 Dev Setup
 
 ### Python environment
