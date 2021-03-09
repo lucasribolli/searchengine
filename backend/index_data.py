@@ -3,15 +3,24 @@ import pandas as pd
 from uuid import uuid4
 from datetime import datetime
 from Wikipedia import Wikipedia
+from elasticsearch.exceptions import RequestError
 from ES import ES
 
 
+"""
+MAX_BYTES_UTF8 = 32766
+
+RequestError(400, 'illegal_argument_exception', 'Document contains at least one immense term in field="text" 
+(whose UTF8 encoding is longer than the max length 32766), all of which were skipped.  
+Please correct the analyzer to not produce such terms.  The prefix of the first immense term is: 
+"""
+"""
 def _format_text(text):
-    ## verify chars in ES Exception
-    if len(text) >= 32332:
-        formtext = text[:32331]
-        return formtext
+    if len(bytearray(text, encoding="utf-8")) >= MAX_BYTES_UTF8:
+        new_text_byte = bytearray(text, encoding="utf-8")[:MAX_BYTES_UTF8 - 10]
+        return new_text_byte.decode()
     return text
+"""
 
 def _format_date(lastmod):
     date = lastmod.split("This page was last edited on")[-1].split(', at')[0].strip()
@@ -25,10 +34,10 @@ def index():
 
     for i, row in wikipedia_data.iterrows():
         wikipedia = Wikipedia(id=uuid4())
-        wikipedia.url = row['url'] if 'url' in row else ''
-        wikipedia.title = row['title'] if 'title' in row else ''
+        wikipedia.url = row['url'] if 'url' in row else None
+        wikipedia.title = row['title'] if 'title' in row else None
         wikipedia.lastmod = _format_date(row['lastmod']) if 'lastmod' in row else None
-        wikipedia.text = _format_text(row['text']) if 'text' in row else ''
+        wikipedia.text = row['text'] if 'text' in row else None
         wikipedia.accessdate = row['accessdate'] if 'accessdate' in row else datetime.now()
         wikipedia.save()
     
