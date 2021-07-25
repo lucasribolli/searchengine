@@ -15,7 +15,7 @@ pip install -r requirements.txt
 ```
 
 ### Run Scrapy
-See [how to install Scrapy](https://docs.scrapy.org/en/latest/intro/install.html). After installed, with Anaconda/Miniconda opened go to project root and run:
+See [how to install Scrapy](https://docs.scrapy.org/en/latest/intro/install.html). After installed, with Anaconda/Miniconda opened go to project root and run: 
 ```
 cd crawler\wikipedia
 ```
